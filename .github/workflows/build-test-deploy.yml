@@ -2,7 +2,26 @@ name: CI/CD Java Maven
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 env:
   DEPLOY_ENV: production
+
+jobs:
+  build:
+    name: Build and Cache Dependencies
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
