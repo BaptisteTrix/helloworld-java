@@ -1,0 +1,8 @@
+name: CI/CD Java Maven
+
+on:
+  push:
+    branches: [main]
+
+env:
+  DEPLOY_ENV: production
